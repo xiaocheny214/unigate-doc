@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CodeGroup } from '../components/mdx/CodeGroup';
+
+const curlSnippet = `curl https://api.unigate.top/v1/chat/completions \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_UNIGATE_KEY" \\
+  -d '{
+    "model": "gemini-3.8-flash",
+    "messages": [{"role": "user", "content": "Hello UniGate!"}]
+  }'`;
+
+const pythonSnippet = `from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api.unigate.top/v1",
+    api_key="YOUR_UNIGATE_KEY"
+)
+
+response = client.chat.completions.create(
+    model="gemini-3.8-flash",
+    messages=[{"role": "user", "content": "Hello UniGate!"}]
+)
+print(response.choices[0].message.content)`;
+---
+
+<BaseLayout title="开发者友好的极速 AI API Gateway">
+  <!-- Hero Section -->
+  <section class="relative pt-20 pb-16 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 text-xs text-brand-300">
+        <span>⚡ UniGate 中转站正式开业</span>
+        <span class="w-1 h-1 rounded-full bg-brand-400"></span>
+        <span>Pro 套餐特惠 $5/月</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+        开发者友好的极速 <br/>
+        <span class="bg-gradient-to-r from-brand-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+          AI API Gateway
+        </span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-400 leading-relaxed">
+        无缝对接 Workbuddy 等生产力工具，单日吞吐最高实测 7000 万 Token。以极低门槛享受世界顶级模型的高并发服务。
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <a
+          href="/docs/quickstart"
+          class="px-6 py-3 rounded-xl bg-slate-100 text-slate-900 font-semibold hover:bg-white transition shadow-lg shadow-white/5"
+        >
+          立即查阅接入文档
+        </a>
+        <a
+          href="#pricing"
+          class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 text-white font-semibold hover:brightness-110 transition shadow-lg shadow-brand-500/20"
+        >
+          💥 查看 Pro 特惠 ($5/月)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Code Demo -->
+  <section class="max-w-4xl mx-auto px-4 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-xl font-bold text-slate-200">仅需修改一行 Base URL，极简迁移</h2>
+      <p class="text-xs text-slate-400 mt-1">完全兼容 OpenAI 协议标准，零代码学习成本</p>
+    </div>
+    <CodeGroup
+      client:load
+      items={[
+        { label: 'Python (OpenAI SDK)', code: pythonSnippet, lang: 'python' },
+        { label: 'cURL', code: curlSnippet, lang: 'bash' }
+      ]}
+    />
+  </section>
+
+  <!-- Pricing & Promotional Copy Section -->
+  <section id="pricing" class="max-w-6xl mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold text-white">价格亲民，量大管饱</h2>
+      <p class="text-sm text-slate-400 mt-2">专为高频调用与大模型工具用户量身打造的高配额矩阵</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1: Pricing -->
+      <div class="p-6 rounded-2xl border border-brand-500/30 bg-slate-900/60 relative flex flex-col justify-between">
+        <div class="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-brand-500 text-white text-[10px] font-bold uppercase tracking-wider">
+          开业特惠
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-white">Pro 极速套餐</h3>
+          <div class="mt-4 flex items-baseline gap-2">
+            <span class="text-4xl font-extrabold text-white">$5</span>
+            <span class="text-sm text-slate-400">/ 月</span>
+            <span class="text-xs line-through text-slate-500">原价 $8</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-2">折合每天只需一块钱多一点，即可摆脱官方限额束缚！</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-300">
+            <li class="flex items-center gap-2">✅ 日额度：<strong>$40</strong></li>
+            <li class="flex items-center gap-2">✅ 周额度：<strong>$300</strong></li>
+            <li class="flex items-center gap-2">✅ 月额度：<strong>$1299</strong></li>
+            <li class="flex items-center gap-2">✅ 全面兼容各大主流开源及商用客户端</li>
+          </ul>
+        </div>
+        <a
+          href="https://unigate.top"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-8 block text-center py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-sm transition"
+        >
+          前往官网选购
+        </a>
+      </div>
+
+      <!-- Card 2: Gemini Flash -->
+      <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/40 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-semibold text-brand-400 uppercase tracking-wider">性价比之王</div>
+          <h3 class="text-lg font-bold text-white mt-1">Gemini-3.8-Flash</h3>
+          <p class="text-xs text-slate-400 mt-2">兼具顶级推理性能与闪电般的响应延迟，长文本及高频调用的首选。</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-300">
+            <li class="flex items-start gap-2">⚡ <strong>超大吞吐</strong>：实测日均最高跑出 7000 万 Token。</li>
+            <li class="flex items-start gap-2">🏆 <strong>实力碾压</strong>：LMSYS 综合榜单稳居前 16 位，超越多数旗舰开源模型。</li>
+            <li class="flex items-start gap-2">💼 <strong>生态适配</strong>：完美充当 Workbuddy、Cursor 等的高性能后台引擎。</li>
+          </ul>
+        </div>
+        <a href="/docs/workbuddy-integration" class="mt-8 text-xs text-brand-400 hover:text-brand-300 font-medium">
+          查看 Workbuddy 接入配置 →
+        </a>
+      </div>
+
+      <!-- Card 3: Claude 4.6 -->
+      <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/40 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-semibold text-indigo-400 uppercase tracking-wider">旗舰双星</div>
+          <h3 class="text-lg font-bold text-white mt-1">Claude 4.6 阵营</h3>
+          <p class="text-xs text-slate-400 mt-2">专为深度长文本、高难度编程架构及精细创作准备的稀缺算力节点。</p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-300">
+            <li class="flex items-start gap-2">✨ <strong>Sonnet 4.6 / Opus 4.6</strong>：全能推理与逻辑分析天花板。</li>
+            <li class="flex items-start gap-2">🛡️ <strong>专线稳定</strong>：高可用保障，告别官方账号被封困扰。</li>
+            <li class="flex items-start gap-2">🧩 <strong>全模型支持</strong>：同时覆盖 Gemini-3.1-Pro 等硬核担当。</li>
+          </ul>
+        </div>
+        <a href="/docs/pricing-models" class="mt-8 text-xs text-indigo-400 hover:text-indigo-300 font-medium">
+          查看全部可用模型清单 →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
