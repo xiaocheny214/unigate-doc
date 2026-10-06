@@ -2,13 +2,18 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-slate-800/60 bg-slate-950 py-10 mt-20">
+<footer class="border-t border-slate-200 bg-white py-12 mt-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-    <p>© {currentYear} UniGate. AI API Gateway. All rights reserved.</p>
-    <div class="flex items-center gap-4">
-      <a href="https://unigate.top" class="hover:text-slate-300 transition">官网入口</a>
-      <a href="/docs/quickstart" class="hover:text-slate-300 transition">快速接入</a>
-      <a href="/docs/pricing-models" class="hover:text-slate-300 transition">服务定价</a>
+    <div class="flex items-center gap-2">
+      <span class="font-semibold text-slate-700">UniGate</span>
+      <span>·</span>
+      <p>© {currentYear} UniGate. AI API Gateway 开发者文档. 保留所有权利。</p>
+    </div>
+    <div class="flex items-center gap-5 text-slate-600 font-medium">
+      <a href="https://unigate.top" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition">官方入口</a>
+      <a href="/docs/quickstart" class="hover:text-blue-600 transition">快速开始</a>
+      <a href="/docs/workbuddy-integration" class="hover:text-blue-600 transition">Workbuddy 指南</a>
+      <a href="/docs/pricing-models" class="hover:text-blue-600 transition">模型与定价</a>
     </div>
   </div>
 </footer>
