@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import DocLayout from '../../layouts/DocLayout.astro';
+import { Callout } from '../../components/mdx/Callout';
+import { CodeGroup } from '../../components/mdx/CodeGroup';
+import { Steps } from '../../components/mdx/Steps';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<DocLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  currentSlug={entry.slug}
+>
+  <div class="mb-8 border-b border-slate-800 pb-4">
+    <span class="text-xs font-semibold text-brand-400 uppercase tracking-wider">{entry.data.category}</span>
+    <h1 class="text-3xl font-extrabold text-white mt-1 mb-2">{entry.data.title}</h1>
+    <p class="text-slate-400 text-sm">{entry.data.description}</p>
+  </div>
+
+  <Content components={{ Callout, CodeGroup, Steps }} />
+</DocLayout>
