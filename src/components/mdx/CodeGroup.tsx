@@ -5,7 +5,6 @@ export interface CodeItem {
   label: string;
   code: string;
   lang?: string;
-  sublabel?: string;
   badge?: string;
   highlightLines?: number[];
   footerNote?: string;
@@ -33,28 +32,29 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
   const highlightSet = new Set(active?.highlightLines || []);
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-[#0c121e] text-slate-200 overflow-hidden shadow-2xl shadow-slate-900/40">
+    <div className="rounded-2xl border border-slate-800/90 bg-[#0a0f1d] text-slate-200 overflow-hidden shadow-2xl shadow-slate-950/60">
       {/* Top Header / Tab Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 py-3 bg-[#080d18] border-b border-slate-800/80 gap-3">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 bg-[#070b16] border-b border-slate-800/80 gap-2">
+        {/* Left Tabs (Codex, Claude Code, OpenCode...) with clean pill styling */}
+        <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-none py-0.5">
           {items.map((item, idx) => {
             const isSelected = idx === activeIndex;
             return (
               <button
                 key={item.label}
                 onClick={() => setActiveIndex(idx)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl transition-all whitespace-nowrap ${
                   isSelected
-                    ? 'bg-blue-600/90 text-white shadow-sm shadow-blue-500/20 border border-blue-400/40'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+                    ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/25 ring-1 ring-blue-400/30'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
                 }`}
               >
                 <span>{item.label}</span>
                 {item.badge && (
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded font-normal ${
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
                       isSelected
-                        ? 'bg-blue-800/80 text-blue-100'
+                        ? 'bg-blue-700/80 text-blue-100'
                         : 'bg-slate-800 text-slate-400'
                     }`}
                   >
@@ -66,15 +66,11 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
           })}
         </div>
 
-        <div className="flex items-center justify-between sm:justify-end gap-3 text-xs text-slate-400">
-          {active?.sublabel && (
-            <span className="text-[11px] font-mono text-slate-400 truncate max-w-xs sm:max-w-md">
-              {active.sublabel}
-            </span>
-          )}
+        {/* Right Copy Button */}
+        <div className="flex items-center shrink-0">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 transition-colors shadow-xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700/60 transition shadow-xs active:scale-95"
             aria-label="复制代码"
           >
             {copied ? (
@@ -84,7 +80,7 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5" />
+                <Copy className="w-3.5 h-3.5 text-slate-400" />
                 <span>复制</span>
               </>
             )}
@@ -92,8 +88,8 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
         </div>
       </div>
 
-      {/* Code Viewer with Line Numbers & Highlights */}
-      <div className="relative font-mono text-xs overflow-x-auto bg-[#0a0f1d] py-3 leading-relaxed">
+      {/* Code Viewer with fixed height and vertical scrollbar */}
+      <div className="relative font-mono text-xs overflow-y-auto max-h-[360px] sm:max-h-[400px] bg-[#070c18] py-3.5 leading-relaxed custom-code-scroll">
         <table className="w-full border-collapse">
           <tbody>
             {lines.map((lineText, idx) => {
@@ -136,8 +132,8 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
       </div>
 
       {/* Footer Info / Stats Bar */}
-      <div className="flex flex-wrap items-center justify-between px-4 py-2.5 bg-[#060a12] border-t border-slate-800/70 text-[11px] text-slate-400 font-mono gap-2">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center justify-between px-4 py-2.5 bg-[#050811] border-t border-slate-800/80 text-[11px] text-slate-400 font-mono gap-2">
+        <div className="flex items-center gap-2.5">
           <span className="text-slate-400">{lineCount} 行</span>
           {highlightSet.size > 0 && (
             <>
