@@ -12,16 +12,57 @@ import {
   Sparkles,
   Info
 } from 'lucide-react';
-import { SUPPORTED_MODELS } from './ConfigPanel';
 
 type ConfigMode = 'deskui' | 'models_json';
 type ShellType = 'powershell' | 'bash';
 
+interface WorkbuddyModelOption {
+  id: string;
+  name: string;
+  tag: string;
+  badge?: string;
+  provider: string;
+  desc: string;
+}
+
+const WORKBUDDY_MODELS: WorkbuddyModelOption[] = [
+  {
+    id: 'gemini-3.8-flash-high',
+    name: 'Gemini 3.8 Flash High',
+    tag: '极速高吞吐',
+    provider: 'Google',
+    desc: '极低延迟、极高吞吐，WorkBuddy 日常高频补全与交互首选'
+  },
+  {
+    id: 'gemini-3.1-pro-high',
+    name: 'Gemini 3.1 Pro High',
+    tag: '深度推理',
+    provider: 'Google',
+    desc: '全能旗舰推理能力，适合复杂多文件重构与架构分析'
+  },
+  {
+    id: 'claude-sonnet-4-6',
+    name: 'Claude Sonnet 4.6',
+    tag: '推荐测试',
+    badge: '额度小',
+    provider: 'Anthropic',
+    desc: '强大的编程、架构与工具调用能力'
+  },
+  {
+    id: 'claude-opus-4-6',
+    name: 'Claude Opus 4.6',
+    tag: '推荐测试',
+    badge: '额度小',
+    provider: 'Anthropic',
+    desc: '复杂逻辑解构与长上下文终极理解'
+  }
+];
+
 export const WorkbuddyPanel: React.FC = () => {
   const [mode, setMode] = useState<ConfigMode>('deskui');
-  const [selectedModel, setSelectedModel] = useState<string>('gemini-3.8-flash');
+  const [selectedModel, setSelectedModel] = useState<string>('gemini-3.8-flash-high');
   const [inputTokenPreset, setInputTokenPreset] = useState<string>('128k');
-  const [outputTokenPreset, setOutputTokenPreset] = useState<string>('8192');
+  const [outputTokenPreset, setOutputTokenPreset] = useState<string>('16k');
   const [activeShell, setActiveShell] = useState<ShellType>('powershell');
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -39,16 +80,22 @@ export const WorkbuddyPanel: React.FC = () => {
         return 64000;
       case '128k':
         return 128000;
-      case '8192':
+      case '256k':
+        return 256000;
+      case '8k':
         return 8192;
-      case '4096':
-        return 4096;
+      case '16k':
+        return 16384;
+      case '32k_out':
+        return 32000;
+      case '64k_out':
+        return 64000;
       default:
         return 128000;
     }
   };
 
-  const currentModelObj = SUPPORTED_MODELS.find((m) => m.id === selectedModel) || SUPPORTED_MODELS[1];
+  const currentModelObj = WORKBUDDY_MODELS.find((m) => m.id === selectedModel) || WORKBUDDY_MODELS[0];
 
   const modelsJsonContent = `{
   "models": [
@@ -249,7 +296,7 @@ curl https://unigate.top/v1/chat/completions \\
                   </button>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-1">
-                  {SUPPORTED_MODELS.map((m) => (
+                  {WORKBUDDY_MODELS.map((m) => (
                     <button
                       key={m.id}
                       onClick={() => setSelectedModel(m.id)}
@@ -273,8 +320,8 @@ curl https://unigate.top/v1/chat/completions \\
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
                   最大输入 (Input Tokens)
                 </div>
-                <div className="flex items-center gap-2">
-                  {['32k', '64k', '128k'].map((val) => (
+                <div className="flex flex-wrap items-center gap-2">
+                  {['32k', '64k', '128k', '256k'].map((val) => (
                     <button
                       key={val}
                       onClick={() => setInputTokenPreset(val)}
@@ -289,7 +336,7 @@ curl https://unigate.top/v1/chat/completions \\
                   ))}
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
-                  推荐选 128k。UniGate 全面兼容长文本输入，支撑大型工程代码索引。
+                  支持 32k / 64k / 128k / 256k。推荐 128k 或 256k，支撑大型项目代码索引与超长多文件检索。
                 </p>
               </div>
 
@@ -298,23 +345,28 @@ curl https://unigate.top/v1/chat/completions \\
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
                   最大输出 (Output Tokens)
                 </div>
-                <div className="flex items-center gap-2">
-                  {['4096', '8192'].map((val) => (
+                <div className="flex flex-wrap items-center gap-2">
+                  {[
+                    { label: '8k', key: '8k' },
+                    { label: '16k', key: '16k' },
+                    { label: '32k', key: '32k_out' },
+                    { label: '64k', key: '64k_out' }
+                  ].map((item) => (
                     <button
-                      key={val}
-                      onClick={() => setOutputTokenPreset(val)}
+                      key={item.key}
+                      onClick={() => setOutputTokenPreset(item.key)}
                       className={`text-xs px-3 py-1 rounded font-medium transition-colors ${
-                        outputTokenPreset === val
+                        outputTokenPreset === item.key
                           ? 'bg-blue-600 text-white font-semibold'
                           : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
                       }`}
                     >
-                      {val}
+                      {item.label}
                     </button>
                   ))}
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
-                  推荐 8192，保证代码重构与大型函数生成完整不截断。
+                  支持 8k / 16k / 32k / 64k。推荐 16k 以上，保证生成超长单文件与完整工程代码不截断。
                 </p>
               </div>
             </div>
@@ -370,7 +422,7 @@ curl https://unigate.top/v1/chat/completions \\
                 <Sliders className="w-4 h-4 text-blue-600" />
                 <span className="text-xs font-bold text-slate-700">选择要写入的模型配置：</span>
                 <div className="flex flex-wrap gap-1">
-                  {SUPPORTED_MODELS.map((m) => (
+                  {WORKBUDDY_MODELS.map((m) => (
                     <button
                       key={m.id}
                       onClick={() => setSelectedModel(m.id)}
@@ -534,7 +586,7 @@ curl https://unigate.top/v1/chat/completions \\
               未找到模型 或 404 错误
             </div>
             <p className="text-xs text-slate-600 leading-relaxed mt-2">
-              请检查填写的模型名称是否准确对应 UniGate 支持的模型 ID（如 <code className="bg-slate-100 px-1 py-0.5 rounded font-mono">gemini-3.8-flash</code>、<code className="bg-slate-100 px-1 py-0.5 rounded font-mono">claude-sonnet-4-6</code> 等）。
+              请检查填写的模型名称是否准确对应 UniGate 支持的模型 ID（如 <code className="bg-slate-100 px-1 py-0.5 rounded font-mono">gemini-3.8-flash-high</code>、<code className="bg-slate-100 px-1 py-0.5 rounded font-mono">gemini-3.1-pro-high</code>、<code className="bg-slate-100 px-1 py-0.5 rounded font-mono">claude-sonnet-4-6</code> 等）。
             </p>
           </div>
 
