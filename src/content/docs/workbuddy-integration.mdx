@@ -1,18 +1,10 @@
 ---
-title: "Workbuddy 接入指南"
-description: "如何在 Workbuddy 工具中配置 UniGate 自定义端点，享受超大 Token 吞吐"
-category: "生态集成"
-order: 2
+title: "WorkBuddy / CodeBuddy"
+description: "配置 WorkBuddy / CodeBuddy 客户端与本地自定义模型，接入 UniGate"
+category: "接入 Agent 工具"
+order: 10
 ---
 
-# Workbuddy 接入指南
+import { WorkbuddyPanel } from '../../components/mdx/WorkbuddyPanel';
 
-针对使用 Workbuddy 的开发者，UniGate 提供高性价比的第三方端点支持。相比官方每期有限的点数，UniGate Pro 套餐提供每天高达 7000 万 Token 的吞吐能力。
-
-## 配置步骤
-
-1. 打开 Workbuddy 设置面板。
-2. 找到 **自定义模型提供商 (Custom Provider)**。
-3. 填入 API 地址：`https://api.unigate.top/v1`。
-4. 填入您的 UniGate API Key。
-5. 模型选择推荐使用 `gemini-3.8-flash` 或 `claude-3-5-sonnet`。
+<WorkbuddyPanel client:load />

@@ -11,6 +11,18 @@ interface Props {
 const { title, description, currentSlug } = Astro.props;
 const docs = await getCollection('docs');
 const sortedDocs = docs.sort((a, b) => a.data.order - b.data.order);
+
+// 按分类分组，保持组内按 order 排序，同时保持组的首次出现顺序
+const groupedDocs = sortedDocs.reduce((acc, doc) => {
+  const cat = doc.data.category || '其它指南';
+  if (!acc[cat]) {
+    acc[cat] = [];
+  }
+  acc[cat].push(doc);
+  return acc;
+}, {} as Record<string, typeof sortedDocs>);
+
+const categories = Object.keys(groupedDocs);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -18,25 +30,31 @@ const sortedDocs = docs.sort((a, b) => a.data.order - b.data.order);
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
       <!-- Sidebar (col-span-3 on lg+) -->
       <aside class="hidden lg:block lg:col-span-3 border-r border-slate-200/80 pr-6 xl:pr-8">
-        <div class="sticky top-24 space-y-5">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3">文档导航</div>
-          <nav class="space-y-1">
-            {sortedDocs.map((doc) => {
-              const isActive = currentSlug === doc.slug;
-              return (
-                <a
-                  href={`/docs/${doc.slug}`}
-                  class={`block px-3.5 py-2 text-sm rounded-lg transition font-medium ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-200/60 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
-                  }`}
-                >
-                  {doc.data.title}
-                </a>
-              );
-            })}
-          </nav>
+        <div class="sticky top-24 space-y-6">
+          {categories.map((category) => (
+            <div class="space-y-2">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3">
+                {category}
+              </div>
+              <nav class="space-y-1">
+                {groupedDocs[category].map((doc) => {
+                  const isActive = currentSlug === doc.slug;
+                  return (
+                    <a
+                      href={`/docs/${doc.slug}`}
+                      class={`block px-3.5 py-2 text-sm rounded-lg transition font-medium ${
+                        isActive
+                          ? 'bg-blue-50 text-blue-700 font-semibold border border-blue-200/60 shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      {doc.data.title}
+                    </a>
+                  );
+                })}
+              </nav>
+            </div>
+          ))}
         </div>
       </aside>
 
