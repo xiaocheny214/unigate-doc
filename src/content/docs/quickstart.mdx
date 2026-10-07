@@ -5,54 +5,8 @@ category: "入门指南"
 order: 1
 ---
 
-## 首次调用 API
+import { QuickstartPanel } from '../../components/mdx/QuickstartPanel';
 
-UniGate API 使用与 OpenAI/Anthropic 完全兼容的 API 格式。通过简单修改配置，您可以使用官方的 OpenAI/Anthropic SDK，或任何与其兼容的第三方软件来访问 UniGate API。
+UniGate API 严格兼容 OpenAI 与 Anthropic 官方协议。无需更换已有代码库的 SDK，只需将 Base URL 指向 UniGate，即可自由路由主流顶尖大模型。
 
-| PARAM | VALUE |
-| :--- | :--- |
-| base_url (OpenAI) | `https://unigate.top/v1` |
-| base_url (Anthropic) | `https://unigate.top/v1` |
-| api_key | [申请一个 API key](https://unigate.top/keys) |
-| model | `gemini-3.8-flash` <sup>(1)</sup><br/>`claude-sonnet-4-6`<br/>`claude-opus-4-6`<br/>`gemini-3.1-pro` |
-
-*(1) 我们推荐使用 `gemini-3.8-flash` 作为基础测试模型。如需查看所有支持的模型列表及定价说明，请参阅 [模型与定价说明](/docs/pricing-models)。*
-
-## 接入 Agent 工具
-
-UniGate 开发者预览版已面向全球开发者开放测试。
-
-UniGate API 已接入多种主流 AI Agent 与编程助手工具。如果你使用 Claude Code、Cursor、GitHub Copilot、OpenCode 等工具，可以直接将 UniGate 作为后端模型，无需编写代码即可开始使用。
-
-<Callout type="tip" title="Claude Code 接入示例">
-  如果在终端使用 Claude Code，你可以直接注入环境变量来模拟 Anthropic 接口：
-  ```bash
-  export ANTHROPIC_BASE_URL="https://unigate.top/v1"
-  export ANTHROPIC_AUTH_TOKEN="sk-unigate-xxxxxxxx"
-  ```
-</Callout>
-
-## 调用对话 API
-
-在创建 API key 之后，你可以使用以下样例脚本，通过 OpenAI 或 Anthropic API 格式来访问模型。样例为非流式输出，您可以将 `stream` 设置为 `true` 来使用流式输出。
-
-<CodeGroup
-  items={[
-    {
-      label: "cURL",
-      code: "curl https://unigate.top/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer YOUR_API_KEY\" \\\n  -d '{\n    \"model\": \"gemini-3.8-flash\",\n    \"messages\": [\n      {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n      {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    \"stream\": false\n  }'"
-    },
-    {
-      label: "Python",
-      code: "from openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://unigate.top/v1\",\n    api_key=\"YOUR_API_KEY\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gemini-3.8-flash\",\n    messages=[\n        {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    stream=False\n)\n\nprint(response.choices[0].message.content)"
-    },
-    {
-      label: "Node.js",
-      code: "import OpenAI from \"openai\";\n\nconst openai = new OpenAI({\n  baseURL: \"https://unigate.top/v1\",\n  apiKey: \"YOUR_API_KEY\"\n});\n\nasync function main() {\n  const completion = await openai.chat.completions.create({\n    messages: [\n      { role: \"system\", content: \"You are a helpful assistant.\" },\n      { role: \"user\", content: \"Hello!\" }\n    ],\n    model: \"gemini-3.8-flash\",\n  });\n\n  console.log(completion.choices[0].message.content);\n}\n\nmain();"
-    }
-  ]}
-/>
-
-<Callout type="warning" title="安全提示">
-  请勿将 API Key 提交至任何公开代码仓库（如 GitHub）。请使用环境变量（如 `.env`）进行注入管理。
-</Callout>
+<QuickstartPanel client:load />

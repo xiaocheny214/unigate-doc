@@ -4,6 +4,8 @@ import DocLayout from '../../layouts/DocLayout.astro';
 import { Callout } from '../../components/mdx/Callout';
 import { CodeGroup } from '../../components/mdx/CodeGroup';
 import { Steps } from '../../components/mdx/Steps';
+import { ConfigPanel } from '../../components/mdx/ConfigPanel';
+import { QuickstartPanel } from '../../components/mdx/QuickstartPanel';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -30,5 +32,5 @@ const { Content } = await entry.render();
     <p class="text-slate-600 text-sm leading-relaxed">{entry.data.description}</p>
   </div>
 
-  <Content components={{ Callout, CodeGroup, Steps }} />
+  <Content components={{ Callout, CodeGroup, Steps, ConfigPanel, QuickstartPanel }} />
 </DocLayout>
