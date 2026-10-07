@@ -9,6 +9,7 @@ import { QuickstartPanel } from '../../components/mdx/QuickstartPanel';
 import { PricingModelsPanel } from '../../components/mdx/PricingModelsPanel';
 import { ErrorCodesPanel } from '../../components/mdx/ErrorCodesPanel';
 import { WorkbuddyPanel } from '../../components/mdx/WorkbuddyPanel';
+import { ClaudeCodePanel } from '../../components/mdx/ClaudeCodePanel';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs');
@@ -35,5 +36,5 @@ const { Content } = await entry.render();
     <p class="text-slate-600 text-sm leading-relaxed">{entry.data.description}</p>
   </div>
 
-  <Content components={{ Callout, CodeGroup, Steps, ConfigPanel, QuickstartPanel, PricingModelsPanel, ErrorCodesPanel, WorkbuddyPanel }} />
+  <Content components={{ Callout, CodeGroup, Steps, ConfigPanel, QuickstartPanel, PricingModelsPanel, ErrorCodesPanel, WorkbuddyPanel, ClaudeCodePanel }} />
 </DocLayout>
