@@ -100,39 +100,35 @@ $ aicli "重构认证中间件，并保持测试通过"
 const clientItems = [
   {
     label: 'Codex',
-    badge: 'TOML + JSON',
-    sublabel: '~/.codex/config.toml · ~/.codex/auth.json',
+    badge: 'TOML',
     code: codexSnippet,
     lang: 'toml',
     highlightLines: [3, 10, 16, 20],
-    footerNote: '实测日跑 7000万 Token · 稳定输出'
+    footerNote: '~/.codex/config.toml · ~/.codex/auth.json'
   },
   {
     label: 'Claude Code',
-    badge: 'Shell + JSON',
-    sublabel: 'shell · ~/.claude/settings.json',
+    badge: 'Shell / JSON',
     code: claudeCodeSnippet,
     lang: 'json',
     highlightLines: [2, 3, 9, 10],
-    footerNote: '完全兼容 Anthropic Messages 协议'
+    footerNote: 'shell · ~/.claude/settings.json'
   },
   {
     label: 'OpenCode',
     badge: 'JSON',
-    sublabel: '~/.config/opencode/opencode.json',
     code: opencodeSnippet,
     lang: 'json',
     highlightLines: [4, 12, 13, 17],
-    footerNote: '原生适配 AI-SDK 开源生态'
+    footerNote: '~/.config/opencode/opencode.json'
   },
   {
     label: 'OpenAI Compatible',
-    badge: 'Cline · Trae · CCSwitch',
-    sublabel: '兼容主流 IDE 插件与客户端',
+    badge: 'IDE',
     code: openAiCompatibleSnippet,
     lang: 'yaml',
     highlightLines: [2, 3, 4, 5],
-    footerNote: '支持任意标准 OpenAI 协议客户端'
+    footerNote: 'Cline · Trae · CCSwitch · 任意兼容客户端'
   }
 ];
 ---
@@ -141,20 +137,6 @@ const clientItems = [
   <!-- Hero Section -->
   <section class="relative pt-16 pb-16 overflow-hidden bg-grid-pattern border-b border-slate-200/60">
     <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
-
-      <!-- Top Protocol Compatibility Notice -->
-      <div class="flex items-center justify-center gap-2 text-[12px] sm:text-xs font-medium text-slate-500 tracking-wide">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-          兼容主流 API 协议
-        </span>
-        <span class="text-slate-400 font-mono hidden sm:inline">|</span>
-        <span class="text-slate-600 font-medium">Chat Completions</span>
-        <span class="text-slate-300">·</span>
-        <span class="text-slate-600 font-medium">Anthropic Messages</span>
-        <span class="text-slate-300">·</span>
-        <span class="text-slate-600 font-medium">Gemini Native generateContent</span>
-      </div>
 
       <!-- Announcement Pill -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 text-xs text-blue-700 shadow-xs">
@@ -190,12 +172,18 @@ const clientItems = [
         </a>
       </div>
 
-      <!-- Feature Pill Badges -->
-      <div class="flex flex-wrap items-center justify-center gap-2 pt-4 text-xs text-slate-500 font-medium">
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">✨ 主打 Gemini-3.8-Flash-High / 3.1-Pro-High</span>
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">⚡ 实测日跑 7000万 Token</span>
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">🛠️ 完美适配各类代码编辑器客户端</span>
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">🛡️ 专线高可用保障</span>
+      <!-- Protocol Compatibility Notice -->
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-2 text-[12px] sm:text-xs font-medium text-slate-600">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100/90 text-slate-700 border border-slate-200/80 shadow-2xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+          兼容主流 API 协议
+        </span>
+        <span class="text-slate-300 hidden sm:inline">|</span>
+        <span class="px-2.5 py-0.5 rounded-md bg-white border border-slate-200/60 text-slate-700 shadow-2xs font-mono text-[11px] sm:text-xs">Chat Completions</span>
+        <span class="text-slate-300">·</span>
+        <span class="px-2.5 py-0.5 rounded-md bg-white border border-slate-200/60 text-slate-700 shadow-2xs font-mono text-[11px] sm:text-xs">Anthropic Messages</span>
+        <span class="text-slate-300">·</span>
+        <span class="px-2.5 py-0.5 rounded-md bg-white border border-slate-200/60 text-slate-700 shadow-2xs font-mono text-[11px] sm:text-xs">Gemini Native generateContent</span>
       </div>
     </div>
   </section>
@@ -208,24 +196,26 @@ const clientItems = [
       <p class="text-sm text-slate-500 mt-1.5">所有工具共用同一个 API Key 和 Base URL，零迁移成本</p>
     </div>
 
-    <!-- 终端风格外壳与精致阴影排布 -->
-    <div class="relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200/70 overflow-hidden">
-      <!-- 终端风格顶部栏 -->
-      <div class="h-11 bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between px-4">
+    <!-- 文本编辑器/终端风格外壳与精致阴影排布 -->
+    <div class="relative bg-slate-900/95 rounded-3xl shadow-2xl shadow-slate-900/10 border border-slate-200/80 p-2 sm:p-2.5 backdrop-blur-sm">
+      <!-- 终端风格顶部装饰栏 -->
+      <div class="h-10 px-4 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="flex gap-1.5">
-            <div class="w-3 h-3 rounded-full bg-rose-400/80"></div>
-            <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
-            <div class="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+          <div class="flex gap-1.5 items-center">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
           </div>
-          <div class="text-xs font-medium text-slate-500 font-mono ml-2">unigate-client-setup</div>
+          <div class="text-[12px] font-mono text-slate-400 ml-2 font-medium">unigate-client-setup</div>
         </div>
-        <div class="text-[11px] text-slate-400 font-mono hidden sm:block">
-          Endpoint: https://unigate.top/v1
+        <div class="text-[11px] text-slate-400 font-mono hidden sm:flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span>https://unigate.top/v1</span>
         </div>
       </div>
-      <!-- 代码展示区 -->
-      <div class="p-2 sm:p-3 bg-slate-900">
+
+      <!-- 代码展示与选项卡区 -->
+      <div class="overflow-hidden rounded-2xl">
         <CodeGroup
           client:load
           items={clientItems}

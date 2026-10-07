@@ -17,3 +17,28 @@ body {
     linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
 }
+
+/* Custom sleek dark scrollbar for code viewer */
+.custom-code-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(71, 85, 105, 0.4) transparent;
+}
+
+.custom-code-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-code-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-code-scroll::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.4);
+  border-radius: 9999px;
+}
+
+.custom-code-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
