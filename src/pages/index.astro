@@ -2,46 +2,160 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CodeGroup } from '../components/mdx/CodeGroup';
 
-const pythonSnippet = `from openai import OpenAI
+// 1. Codex 接入示例
+const codexSnippet = `# ~/.codex/config.toml
+model_provider = "OpenAI"
+model = "gemini-3.8-flash-high"
+review_model = "gemini-3.8-flash-high"
+disable_response_storage = true
+network_access = "enabled"
 
-# 兼容标准 OpenAI 客户端，仅需替换 base_url 与 api_key
-client = OpenAI(
-    base_url="https://unigate.top/v1",
-    api_key="sk-unigate-xxxxxxxxxxxxxxxx"
-)
+[model_providers.OpenAI]
+name = "OpenAI"
+base_url = "https://unigate.top/v1"
+wire_api = "responses"
+requires_openai_auth = true
 
-response = client.chat.completions.create(
-    model="gemini-3.8-flash-high",
-    messages=[{"role": "user", "content": "Hello UniGate!"}]
-)
-print(response.choices[0].message.content)`;
+# ~/.codex/auth.json
+{
+  "OPENAI_API_KEY": "sk-unigate-xxxxxxxx"
+}
 
-const curlSnippet = `curl https://unigate.top/v1/chat/completions \\
-  -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer sk-unigate-xxxxxxxxxxxxxxxx" \\
-  -d '{
-    "model": "gemini-3.8-flash-high",
-    "messages": [{"role": "user", "content": "你好 UniGate！"}]
-  }'`;
+$ codex "重构认证中间件，并保持测试通过"
+✓ 14 个文件已修改 · 38 项测试通过 · 本次消耗 USD 0.41`;
 
-const claudeCodeSnippet = `# 对于基于 Anthropic SDK 的工具（如 Claude Code），配置如下变量即可
+// 2. Claude Code 接入示例
+const claudeCodeSnippet = `# macOS / Linux
 export ANTHROPIC_BASE_URL="https://unigate.top/v1"
-export ANTHROPIC_API_KEY="sk-unigate-xxxxxxxxxxxxxxxx"
+export ANTHROPIC_AUTH_TOKEN="sk-unigate-xxxxxxxx"
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
-# 启动 Claude Code 时可直接指定模型
-claude --model gemini-3.8-flash-high`;
+# ~/.claude/settings.json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://unigate.top/v1",
+    "ANTHROPIC_AUTH_TOKEN": "sk-unigate-xxxxxxxx",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  }
+}
 
-const codexSnippet = `{
-  "api_base": "https://unigate.top/v1",
-  "api_key": "sk-unigate-xxxxxxxxxxxxxxxx",
-  "model": "gemini-3.8-flash-high"
-}`;
+$ claude "重构认证中间件，并保持测试通过"
+✓ 14 个文件已修改 · 38 项测试通过 · 本次消耗 USD 0.41`;
+
+// 3. OpenCode 接入示例
+const opencodeSnippet = `# ~/.config/opencode/opencode.json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "unigate/gemini-3.8-flash-high",
+  "small_model": "unigate/gemini-3.8-flash-high",
+  "provider": {
+    "unigate": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "UniGate",
+      "options": {
+        "baseURL": "https://unigate.top/v1",
+        "apiKey": "sk-unigate-xxxxxxxx"
+      },
+      "models": {
+        "gemini-3.8-flash-high": {
+          "name": "Gemini 3.8 Flash High",
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          },
+          "options": {
+            "store": false
+          }
+        }
+      }
+    }
+  },
+  "agent": {
+    "build": {
+      "options": {
+        "store": false
+      }
+    },
+    "plan": {
+      "options": {
+        "store": false
+      }
+    }
+  }
+}
+
+$ opencode "重构认证中间件，并保持测试通过"
+✓ 14 个文件已修改 · 38 项测试通过 · 本次消耗 USD 0.41`;
+
+// 4. OpenAI Compatible 接入示例
+const openAiCompatibleSnippet = `# Cline / Trae / CCSwitch
+API Provider: OpenAI Compatible
+Base URL: https://unigate.top/v1
+API Key: sk-unigate-xxxxxxxx
+Model ID: gemini-3.8-flash-high
+
+$ aicli "重构认证中间件，并保持测试通过"
+✓ 14 个文件已修改 · 38 项测试通过 · 本次消耗 USD 0.41`;
+
+const clientItems = [
+  {
+    label: 'Codex',
+    badge: 'TOML + JSON',
+    sublabel: '~/.codex/config.toml · ~/.codex/auth.json',
+    code: codexSnippet,
+    lang: 'toml',
+    highlightLines: [3, 10, 16, 20],
+    footerNote: '实测日跑 7000万 Token · 稳定输出'
+  },
+  {
+    label: 'Claude Code',
+    badge: 'Shell + JSON',
+    sublabel: 'shell · ~/.claude/settings.json',
+    code: claudeCodeSnippet,
+    lang: 'json',
+    highlightLines: [2, 3, 9, 10],
+    footerNote: '完全兼容 Anthropic Messages 协议'
+  },
+  {
+    label: 'OpenCode',
+    badge: 'JSON',
+    sublabel: '~/.config/opencode/opencode.json',
+    code: opencodeSnippet,
+    lang: 'json',
+    highlightLines: [4, 12, 13, 17],
+    footerNote: '原生适配 AI-SDK 开源生态'
+  },
+  {
+    label: 'OpenAI Compatible',
+    badge: 'Cline · Trae · CCSwitch',
+    sublabel: '兼容主流 IDE 插件与客户端',
+    code: openAiCompatibleSnippet,
+    lang: 'yaml',
+    highlightLines: [2, 3, 4, 5],
+    footerNote: '支持任意标准 OpenAI 协议客户端'
+  }
+];
 ---
 
 <BaseLayout title="开发者友好的极速 AI API Gateway">
   <!-- Hero Section -->
-  <section class="relative pt-20 pb-16 overflow-hidden bg-grid-pattern border-b border-slate-200/60">
+  <section class="relative pt-16 pb-16 overflow-hidden bg-grid-pattern border-b border-slate-200/60">
     <div class="max-w-5xl mx-auto px-4 text-center space-y-6">
+
+      <!-- Top Protocol Compatibility Notice -->
+      <div class="flex items-center justify-center gap-2 text-[12px] sm:text-xs font-medium text-slate-500 tracking-wide">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+          兼容主流 API 协议
+        </span>
+        <span class="text-slate-400 font-mono hidden sm:inline">|</span>
+        <span class="text-slate-600 font-medium">Chat Completions</span>
+        <span class="text-slate-300">·</span>
+        <span class="text-slate-600 font-medium">Anthropic Messages</span>
+        <span class="text-slate-300">·</span>
+        <span class="text-slate-600 font-medium">Gemini Native generateContent</span>
+      </div>
+
       <!-- Announcement Pill -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 text-xs text-blue-700 shadow-xs">
         <span class="font-semibold">⚡ 开业特惠</span>
@@ -78,9 +192,9 @@ const codexSnippet = `{
 
       <!-- Feature Pill Badges -->
       <div class="flex flex-wrap items-center justify-center gap-2 pt-4 text-xs text-slate-500 font-medium">
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">✨ 优选 Coding 模型</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">✨ 主打 Gemini-3.8-Flash-High / 3.1-Pro-High</span>
         <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">⚡ 实测日跑 7000万 Token</span>
-        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">🛠️ 完美适配各类编辑器客户端</span>
+        <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">🛠️ 完美适配各类代码编辑器客户端</span>
         <span class="px-3 py-1 rounded-full bg-slate-100 border border-slate-200/70">🛡️ 专线高可用保障</span>
       </div>
     </div>
@@ -94,33 +208,33 @@ const codexSnippet = `{
       <p class="text-sm text-slate-500 mt-1.5">所有工具共用同一个 API Key 和 Base URL，零迁移成本</p>
     </div>
 
-    <!-- 增加终端风格外壳与精致阴影排布 -->
-    <div class="relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200/60 overflow-hidden">
+    <!-- 终端风格外壳与精致阴影排布 -->
+    <div class="relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200/70 overflow-hidden">
       <!-- 终端风格顶部栏 -->
-      <div class="h-11 bg-slate-50 border-b border-slate-200/60 flex items-center px-4 gap-2">
-        <div class="flex gap-1.5">
-          <div class="w-3 h-3 rounded-full bg-slate-300"></div>
-          <div class="w-3 h-3 rounded-full bg-slate-300"></div>
-          <div class="w-3 h-3 rounded-full bg-slate-300"></div>
+      <div class="h-11 bg-slate-50/90 border-b border-slate-200/80 flex items-center justify-between px-4">
+        <div class="flex items-center gap-2">
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-rose-400/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+          </div>
+          <div class="text-xs font-medium text-slate-500 font-mono ml-2">unigate-client-setup</div>
         </div>
-        <div class="text-xs font-medium text-slate-400 font-mono ml-2">unigate-config</div>
+        <div class="text-[11px] text-slate-400 font-mono hidden sm:block">
+          Endpoint: https://unigate.top/v1
+        </div>
       </div>
       <!-- 代码展示区 -->
-      <div class="p-1">
+      <div class="p-2 sm:p-3 bg-slate-900">
         <CodeGroup
           client:load
-          items={[
-            { label: 'Claude Code', code: claudeCodeSnippet, lang: 'bash' },
-            { label: 'Codex / OpenCode', code: codexSnippet, lang: 'json' },
-            { label: 'Python (OpenAI SDK)', code: pythonSnippet, lang: 'python' },
-            { label: 'cURL', code: curlSnippet, lang: 'bash' }
-          ]}
+          items={clientItems}
         />
       </div>
     </div>
   </section>
 
-  <!-- Pricing & Promotional Copy Section (Fenno-style Clean Cards) -->
+  <!-- Pricing & Promotional Copy Section (Clean Cards) -->
   <section id="pricing" class="max-w-6xl mx-auto px-4 py-16 border-t border-slate-200/70">
     <div class="text-center mb-12">
       <div class="text-xs font-bold text-blue-600 uppercase tracking-wider">价格与权益</div>
@@ -174,13 +288,13 @@ const codexSnippet = `{
         </a>
       </div>
 
-      <!-- Card 2: Gemini Flash -->
+      <!-- Card 2: Gemini Flash High -->
       <div class="p-7 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-col justify-between hover:border-slate-300 transition">
         <div>
           <div class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">性价比之王</div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">Gemini-3.8-Flash</h3>
+          <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">Gemini-3.8-Flash-High</h3>
           <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-            兼具顶级推理性能与闪电般的响应延迟，长文本及高频调用的首选。
+            兼具顶级推理性能与闪电般的响应延迟，长文本及高频调用的首选主力。
           </p>
 
           <div class="my-5 border-t border-slate-100"></div>
@@ -190,10 +304,10 @@ const codexSnippet = `{
               <span class="text-blue-600 font-bold">⚡</span> <span><strong>超大吞吐</strong>：实测日均最高跑出 7000 万 Token。</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-blue-600 font-bold">🏆</span> <span><strong>实力碾压</strong>：LMSYS 综合榜单稳居前 16 位，超越多数旗舰开源模型。</span>
+              <span class="text-blue-600 font-bold">🏆</span> <span><strong>实力碾压</strong>：代码与复杂上下文表现卓越，超越多数旗舰开源模型。</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-blue-600 font-bold">💼</span> <span><strong>生态适配</strong>：完美充当各类 AI 编程辅助工具的高性能后台引擎。</span>
+              <span class="text-blue-600 font-bold">💼</span> <span><strong>生态适配</strong>：完美充当 Codex、Claude Code、OpenCode 等的高性能后台引擎。</span>
             </li>
           </ul>
         </div>
@@ -203,26 +317,26 @@ const codexSnippet = `{
         </a>
       </div>
 
-      <!-- Card 3: Claude 4.6 -->
+      <!-- Card 3: Gemini 3.1 Pro High & Claude -->
       <div class="p-7 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-col justify-between hover:border-slate-300 transition">
         <div>
-          <div class="text-xs font-semibold text-purple-600 uppercase tracking-wider">旗舰双星</div>
-          <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">Claude 4.6 阵营</h3>
+          <div class="text-xs font-semibold text-purple-600 uppercase tracking-wider">深度推理旗舰</div>
+          <h3 class="text-xl font-extrabold text-slate-900 mt-0.5">Gemini-3.1-Pro-High</h3>
           <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-            专为深度长文本、高难度编程架构及精细创作准备的稀缺算力节点。
+            专为超大上下文、深度逻辑思考、高难度系统级重构准备的强力算力节点。
           </p>
 
           <div class="my-5 border-t border-slate-100"></div>
 
           <ul class="space-y-3 text-xs text-slate-700">
             <li class="flex items-start gap-2">
-              <span class="text-purple-600 font-bold">✨</span> <span><strong>Sonnet 4.6 / Opus 4.6</strong>：全能推理与逻辑分析天花板。</span>
+              <span class="text-purple-600 font-bold">✨</span> <span><strong>深层思考能力</strong>：多步骤复杂任务与极端长代码库分析。</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-purple-600 font-bold">🛡️</span> <span><strong>专线稳定</strong>：高可用保障，告别官方账号被封困扰。</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-purple-600 font-bold">🧩</span> <span><strong>全模型覆盖</strong>：同时支持 Gemini-3.1-Pro 等硬核担当。</span>
+              <span class="text-purple-600 font-bold">🧩</span> <span><strong>双模型主打</strong>：与 Gemini-3.8-Flash-High 组成黄金搭档。</span>
             </li>
           </ul>
         </div>
