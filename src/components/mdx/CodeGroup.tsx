@@ -89,7 +89,7 @@ export const CodeGroup: React.FC<CodeGroupProps> = ({ items }) => {
       </div>
 
       {/* Code Viewer with fixed height and vertical scrollbar */}
-      <div className="relative font-mono text-xs overflow-y-auto max-h-[360px] sm:max-h-[400px] bg-[#070c18] py-3.5 leading-relaxed custom-code-scroll">
+      <div className="relative font-mono text-xs overflow-y-auto h-[360px] sm:h-[400px] bg-[#070c18] py-3.5 leading-relaxed custom-code-scroll">
         <table className="w-full border-collapse">
           <tbody>
             {lines.map((lineText, idx) => {
