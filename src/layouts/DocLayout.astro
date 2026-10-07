@@ -14,10 +14,10 @@ const sortedDocs = docs.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
-      <!-- Sidebar -->
-      <aside class="hidden lg:block lg:col-span-1 border-r border-slate-200/80 pr-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+      <!-- Sidebar (col-span-3 on lg+) -->
+      <aside class="hidden lg:block lg:col-span-3 border-r border-slate-200/80 pr-6 xl:pr-8">
         <div class="sticky top-24 space-y-5">
           <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3">文档导航</div>
           <nav class="space-y-1">
@@ -40,8 +40,8 @@ const sortedDocs = docs.sort((a, b) => a.data.order - b.data.order);
         </div>
       </aside>
 
-      <!-- Main Doc Content -->
-      <article class="lg:col-span-3 prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 prose-pre:bg-slate-900 prose-pre:text-slate-100">
+      <!-- Main Doc Content (col-span-9 on lg+) -->
+      <article class="lg:col-span-9 min-w-0 prose prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 prose-pre:bg-slate-900 prose-pre:text-slate-100">
         <slot />
       </article>
     </div>
