@@ -11,8 +11,8 @@ UniGate API 使用与 OpenAI/Anthropic 完全兼容的 API 格式。通过简单
 
 | PARAM | VALUE |
 | :--- | :--- |
-| base_url (OpenAI) | `https://api.unigate.top/v1` |
-| base_url (Anthropic) | `https://api.unigate.top/v1` |
+| base_url (OpenAI) | `https://unigate.top/v1` |
+| base_url (Anthropic) | `https://unigate.top/v1` |
 | api_key | [申请一个 API key](https://unigate.top) |
 | model | `gemini-3.8-flash` <sup>(1)</sup><br/>`claude-3-7-sonnet`<br/>`gemini-3.1-pro` |
 
@@ -27,7 +27,7 @@ UniGate API 已接入多种主流 AI Agent 与编程助手工具。如果你使�
 <Callout type="tip" title="Claude Code 接入示例">
   如果在终端使用 Claude Code，你可以直接注入环境变量来模拟 Anthropic 接口：
   ```bash
-  export ANTHROPIC_BASE_URL="https://api.unigate.top/v1"
+  export ANTHROPIC_BASE_URL="https://unigate.top/v1"
   export ANTHROPIC_AUTH_TOKEN="sk-unigate-xxxxxxxx"
   ```
 </Callout>
@@ -40,15 +40,15 @@ UniGate API 已接入多种主流 AI Agent 与编程助手工具。如果你使�
   items={[
     {
       label: "cURL",
-      code: "curl https://api.unigate.top/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer YOUR_API_KEY\" \\\n  -d '{\n    \"model\": \"gemini-3.8-flash\",\n    \"messages\": [\n      {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n      {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    \"stream\": false\n  }'"
+      code: "curl https://unigate.top/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer YOUR_API_KEY\" \\\n  -d '{\n    \"model\": \"gemini-3.8-flash\",\n    \"messages\": [\n      {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n      {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    \"stream\": false\n  }'"
     },
     {
       label: "Python",
-      code: "from openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://api.unigate.top/v1\",\n    api_key=\"YOUR_API_KEY\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gemini-3.8-flash\",\n    messages=[\n        {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    stream=False\n)\n\nprint(response.choices[0].message.content)"
+      code: "from openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://unigate.top/v1\",\n    api_key=\"YOUR_API_KEY\"\n)\n\nresponse = client.chat.completions.create(\n    model=\"gemini-3.8-flash\",\n    messages=[\n        {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n        {\"role\": \"user\", \"content\": \"Hello!\"}\n    ],\n    stream=False\n)\n\nprint(response.choices[0].message.content)"
     },
     {
       label: "Node.js",
-      code: "import OpenAI from \"openai\";\n\nconst openai = new OpenAI({\n  baseURL: \"https://api.unigate.top/v1\",\n  apiKey: \"YOUR_API_KEY\"\n});\n\nasync function main() {\n  const completion = await openai.chat.completions.create({\n    messages: [\n      { role: \"system\", content: \"You are a helpful assistant.\" },\n      { role: \"user\", content: \"Hello!\" }\n    ],\n    model: \"gemini-3.8-flash\",\n  });\n\n  console.log(completion.choices[0].message.content);\n}\n\nmain();"
+      code: "import OpenAI from \"openai\";\n\nconst openai = new OpenAI({\n  baseURL: \"https://unigate.top/v1\",\n  apiKey: \"YOUR_API_KEY\"\n});\n\nasync function main() {\n  const completion = await openai.chat.completions.create({\n    messages: [\n      { role: \"system\", content: \"You are a helpful assistant.\" },\n      { role: \"user\", content: \"Hello!\" }\n    ],\n    model: \"gemini-3.8-flash\",\n  });\n\n  console.log(completion.choices[0].message.content);\n}\n\nmain();"
     }
   ]}
 />
