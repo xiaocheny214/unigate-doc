@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="ug-title ug-desc">
+  <title id="ug-title">UniGate</title>
+  <desc id="ug-desc">UniGate - One Gate, Infinite Possibilities. Obsidian Monolith Prism Refraction Gateway.</desc>
+  <defs>
+    <!-- Background Gradient: Ultra Deep Space Void -->
+    <linearGradient id="ug-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d18"/>
+      <stop offset="50%" stop-color="#050810"/>
+      <stop offset="100%" stop-color="#020306"/>
+    </linearGradient>
+
+    <!-- Monolith Obsidian Body Gradient -->
+    <linearGradient id="ug-monolith" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#243048"/>
+      <stop offset="35%" stop-color="#151e32"/>
+      <stop offset="70%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <!-- Monolith Chamfer Edge Lights -->
+    <linearGradient id="ug-edge-cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#1e293b" stop-opacity="0.3"/>
+    </linearGradient>
+
+    <linearGradient id="ug-outer-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Spectrum Beams (Infinite Possibilities: Sky Blue, Cyan, Emerald, Amber, Neon Pink, Royal Purple) -->
+    <linearGradient id="ug-beam-1" x1="0%" y1="50%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#38bdf8"/>
+      <stop offset="70%" stop-color="#0284c7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="ug-beam-2" x1="0%" y1="50%" x2="100%" y2="15%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#2dd4bf"/>
+      <stop offset="70%" stop-color="#0d9488" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0f766e" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="ug-beam-3" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#fbbf24"/>
+      <stop offset="70%" stop-color="#d97706" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="ug-beam-4" x1="0%" y1="50%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#f43f5e"/>
+      <stop offset="70%" stop-color="#e11d48" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#be123c" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="ug-beam-5" x1="0%" y1="50%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#c084fc"/>
+      <stop offset="70%" stop-color="#9333ea" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7e22ce" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Core Glow & Lasing Filters -->
+    <filter id="ug-laser-glow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="8" result="blur1"/>
+      <feGaussianBlur stdDeviation="3" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="ug-drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <radialGradient id="ug-core-radial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#0284c7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Container Box -->
+  <rect x="16" y="16" width="480" height="480" rx="120" fill="url(#ug-bg)"/>
+  <rect x="16.75" y="16.75" width="478.5" height="478.5" rx="119.25" fill="none" stroke="#38bdf8" stroke-opacity="0.15" stroke-width="1.5"/>
+
+  <!-- Subtle Ambient Gate Coordinates -->
+  <circle cx="256" cy="256" r="172" fill="none" stroke="#38bdf8" stroke-opacity="0.05" stroke-width="1.5" stroke-dasharray="4 8"/>
+  <circle cx="256" cy="256" r="118" fill="none" stroke="#6366f1" stroke-opacity="0.06" stroke-width="1.5"/>
+
+  <!-- Background Refracted Spectrum Beams ("Infinite Possibilities") -->
+  <g>
+    <!-- Beam 1: Celestial Cyan -->
+    <polygon points="256,256 466,132 474,154 256,256" fill="url(#ug-beam-1)" opacity="0.9"/>
+    <!-- Beam 2: Bio Teal / Emerald -->
+    <polygon points="256,256 476,188 480,212 256,256" fill="url(#ug-beam-2)" opacity="0.9"/>
+    <!-- Beam 3: Solar Amber / Gold -->
+    <polygon points="256,256 480,248 480,272 256,256" fill="url(#ug-beam-3)" opacity="0.9"/>
+    <!-- Beam 4: Quantum Rose / Neon Pink -->
+    <polygon points="256,256 474,306 466,328 256,256" fill="url(#ug-beam-4)" opacity="0.9"/>
+    <!-- Beam 5: Deep Violet / Purple -->
+    <polygon points="256,256 450,358 436,378 256,256" fill="url(#ug-beam-5)" opacity="0.9"/>
+  </g>
+
+  <!-- Incoming "One Gate" Pure Coherent Laser Beam -->
+  <g>
+    <!-- Laser Beam Halo -->
+    <line x1="36" y1="256" x2="256" y2="256" stroke="#38bdf8" stroke-width="14" stroke-linecap="round" opacity="0.35" filter="url(#ug-laser-glow)"/>
+    <!-- Laser Beam Core -->
+    <line x1="36" y1="256" x2="256" y2="256" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" filter="url(#ug-laser-glow)"/>
+    <!-- Beam Origin Particle -->
+    <circle cx="48" cy="256" r="4" fill="#ffffff" filter="url(#ug-laser-glow)"/>
+  </g>
+
+  <!-- The Monolith Gateway Arch (Forming the U and the Gate Architecture) -->
+  <g filter="url(#ug-drop-shadow)">
+    <!-- Outer Solid Arch Silhouette -->
+    <path d="M 166 112
+             V 288
+             C 166 370, 216 404, 256 404
+             C 296 404, 346 370, 346 288
+             V 112
+             H 390
+             V 288
+             C 390 398, 314 446, 256 446
+             C 198 446, 122 398, 122 288
+             V 112
+             Z"
+          fill="url(#ug-monolith)"
+          stroke="url(#ug-outer-rim)"
+          stroke-width="1.5"/>
+
+    <!-- Inner Chamfer Laser Reflection (Highlight on the inner U contour) -->
+    <path d="M 166 112 V 288 C 166 370, 216 404, 256 404 C 296 404, 346 370, 346 288 V 112"
+          fill="none"
+          stroke="url(#ug-edge-cyan)"
+          stroke-width="3"
+          stroke-linecap="round"
+          opacity="0.85"/>
+
+    <!-- Outer Left Column Edge Glint -->
+    <line x1="122" y1="120" x2="122" y2="290" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4"/>
+    <line x1="390" y1="120" x2="390" y2="290" stroke="#818cf8" stroke-width="2" stroke-opacity="0.4"/>
+
+    <!-- Gate Top Lintel Nodes -->
+    <circle cx="144" cy="112" r="3.5" fill="#38bdf8"/>
+    <circle cx="368" cy="112" r="3.5" fill="#c084fc"/>
+  </g>
+
+  <!-- Central Prism Core (The Singularity transforming One into Infinite) -->
+  <g>
+    <!-- Ambient Core Pulse -->
+    <circle cx="256" cy="256" r="48" fill="url(#ug-core-radial)" opacity="0.25"/>
+
+    <!-- Floating Crystalline Prism (Equilateral Triangle in Gate Focal Point) -->
+    <polygon points="256,216 290,276 222,276" fill="#ffffff" opacity="0.95" filter="url(#ug-laser-glow)"/>
+    <polygon points="256,225 282,272 230,272" fill="#38bdf8" opacity="0.9"/>
+    <polygon points="256,236 272,267 240,267" fill="#0284c7"/>
+
+    <!-- Brilliant Point-Zero Singularity Spark -->
+    <circle cx="256" cy="256" r="7" fill="#ffffff" filter="url(#ug-laser-glow)"/>
+    <circle cx="256" cy="256" r="3" fill="#a5f3fc"/>
+  </g>
+</svg>

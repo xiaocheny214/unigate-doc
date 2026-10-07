@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 160" role="img" aria-labelledby="lockup-title lockup-desc">
+  <title id="lockup-title">UniGate</title>
+  <desc id="lockup-desc">UniGate - One Gate, Infinite Possibilities</desc>
+  <defs>
+    <!-- Background Gradient for Icon -->
+    <linearGradient id="hl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d18"/>
+      <stop offset="50%" stop-color="#050810"/>
+      <stop offset="100%" stop-color="#020306"/>
+    </linearGradient>
+
+    <!-- Monolith Body Gradient -->
+    <linearGradient id="hl-monolith" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#243048"/>
+      <stop offset="35%" stop-color="#151e32"/>
+      <stop offset="70%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </linearGradient>
+
+    <linearGradient id="hl-edge-cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#1e293b" stop-opacity="0.3"/>
+    </linearGradient>
+
+    <!-- Spectrum Beams -->
+    <linearGradient id="hl-b1" x1="0%" y1="50%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hl-b2" x1="0%" y1="50%" x2="100%" y2="15%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#0f766e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hl-b3" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hl-b4" x1="0%" y1="50%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#be123c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hl-b5" x1="0%" y1="50%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#7e22ce" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Text Gradients -->
+    <linearGradient id="hl-text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="65%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+
+    <linearGradient id="hl-slogan-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="35%" stop-color="#2dd4bf"/>
+      <stop offset="65%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+
+    <filter id="hl-glow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Left: Scaled Option 2 Emblem (140x140) -->
+  <g transform="translate(10, 10) scale(0.2734)">
+    <rect x="16" y="16" width="480" height="480" rx="120" fill="url(#hl-bg)"/>
+    <rect x="16.75" y="16.75" width="478.5" height="478.5" rx="119.25" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="2"/>
+
+    <!-- Spectrum Beams -->
+    <polygon points="256,256 466,132 474,154 256,256" fill="url(#hl-b1)" opacity="0.9"/>
+    <polygon points="256,256 476,188 480,212 256,256" fill="url(#hl-b2)" opacity="0.9"/>
+    <polygon points="256,256 480,248 480,272 256,256" fill="url(#hl-b3)" opacity="0.9"/>
+    <polygon points="256,256 474,306 466,328 256,256" fill="url(#hl-b4)" opacity="0.9"/>
+    <polygon points="256,256 450,358 436,378 256,256" fill="url(#hl-b5)" opacity="0.9"/>
+
+    <!-- Incoming One Gate Laser -->
+    <line x1="36" y1="256" x2="256" y2="256" stroke="#38bdf8" stroke-width="14" stroke-linecap="round" opacity="0.35" filter="url(#hl-glow)"/>
+    <line x1="36" y1="256" x2="256" y2="256" stroke="#ffffff" stroke-width="5" stroke-linecap="round" filter="url(#hl-glow)"/>
+
+    <!-- Monolith Arch -->
+    <path d="M 166 112 V 288 C 166 370, 216 404, 256 404 C 296 404, 346 370, 346 288 V 112 H 390 V 288 C 390 398, 314 446, 256 446 C 198 446, 122 398, 122 288 V 112 Z"
+          fill="url(#hl-monolith)" stroke="#334155" stroke-width="2"/>
+
+    <path d="M 166 112 V 288 C 166 370, 216 404, 256 404 C 296 404, 346 370, 346 288 V 112"
+          fill="none" stroke="url(#hl-edge-cyan)" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Prism Core -->
+    <polygon points="256,216 290,276 222,276" fill="#ffffff" filter="url(#hl-glow)"/>
+    <polygon points="256,225 282,272 230,272" fill="#38bdf8"/>
+    <circle cx="256" cy="256" r="8" fill="#ffffff" filter="url(#hl-glow)"/>
+  </g>
+
+  <!-- Right: Typography & Slogan -->
+  <g transform="translate(175, 0)">
+    <!-- UniGate Wordmark -->
+    <text x="0" y="82" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="56" font-weight="800" letter-spacing="-0.5" fill="url(#hl-text-grad)">UniGate</text>
+
+    <!-- Spectrum Particle -->
+    <circle cx="245" cy="58" r="4.5" fill="#38bdf8" filter="url(#hl-glow)"/>
+
+    <!-- Slogan: One Gate, Infinite Possibilities -->
+    <text x="2" y="118" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" letter-spacing="1.8" fill="url(#hl-slogan-grad)">ONE GATE, INFINITE POSSIBILITIES</text>
+
+    <!-- Micro Spectrum Accent Line -->
+    <rect x="2" y="132" width="375" height="2" rx="1" fill="url(#hl-slogan-grad)" opacity="0.6"/>
+    <circle cx="382" cy="133" r="2.5" fill="#c084fc"/>
+  </g>
+</svg>
